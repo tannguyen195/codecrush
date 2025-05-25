@@ -1,54 +1,49 @@
-# React + TypeScript + Vite
+#  A React + Three Fiber Interactive Scene
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A 3D interactive experience built with **React**, **Vite**, and **@react-three/fiber**, featuring dynamic state management, physics, animations, camera lerping, and sound. Users can interact with the world, change themes, and control the character with keyboard input.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **ReactJS** + **Vite** – Lightning-fast frontend framework
+- **TypeScript** – For type safety and developer tooling
+- **@react-three/fiber** – React renderer for Three.js
+- **@react-three/drei** – Useful helpers for R3F
+- **@react-three/rapier** – Realistic physics and collisions
+- **Blender** – Custom 3D modeling and animation
+- ** HTMLAudioElement** – Sound effects and music
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🎮 Features
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 🧠 State Management
+- **Context API** powers global state (e.g. day/night mode, game start, donut-eating state).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🧑‍💻 Interactions
+- Eating donuts alters the character's outlook and state.
+- Click or trigger actions change world behavior dynamically.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🎥 Camera Lerping
+- Smooth third-person camera transitions follow the player with damping/lerping logic.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### 🧱 Physics & Collision
+- Integrated with **Rapier physics** for rigid bodies and realistic collisions.
+
+### 🌗 Day/Night Toggle
+- Toggle button to smoothly switch between **sunny day** and **moody night** lighting environments.
+
+### 🔊 Sounds
+- Background music and interactive sound effects.
+
+### ⌨️ Controls
+- `W` / `↑` – Move Forward  
+- `Shift` (hold) – Sprint  
+- More keys can be added via `useKeyboardControls` (Drei).
+
+### 🧑‍🎨 Blender Integration
+- Models and animations are created and rigged in **Blender**, then exported to glTF and imported via `@react-three/fiber`.
+
+---
+
+
