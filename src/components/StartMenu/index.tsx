@@ -22,7 +22,9 @@ function StartMenu() {
                     transition={{ duration: 0.5 }}
                     className="absolute z-10  h-full  left-1/4 flex items-center justify-center flex-col"
                 >
-                    <button className="rounded-lg " onClick={handleClick}>Start Experience</button>
+                    <div className="rounded-lg bg-gray-800 p-8 cursor-pointer" onClick={handleClick}>
+                        <span className="font-bold text-4xl p-8">Start Experience</span>
+                    </div>
                 </motion.div>
             }
         </AnimatePresence>

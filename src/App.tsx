@@ -9,7 +9,7 @@ import Map from './components/Map';
 import Environment from './components/Environment';
 import { AppProvider, useAppContext } from './context/AppContext';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { useControls } from 'leva';
+import { Leva, useControls } from 'leva';
 import StartMenu from './components/StartMenu';
 import MusicPlayer from './components/MusicPlayer';
 import { Moon, Sun } from 'lucide-react';
@@ -66,16 +66,14 @@ function App() {
               <Environment />
               <CameraSetting />
               <Suspense >
-
-                <Physics timeStep="vary" >
-
+                <Physics timeStep="vary" debug>
                   <Map />
                   <CharacterController />
                 </Physics>
               </Suspense>
           </Canvas>
 
-          {/* <Leva hidden /> */}
+          <Leva hidden />
         </div >
       </KeyboardControls >
     </AppProvider >

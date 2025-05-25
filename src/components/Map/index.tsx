@@ -1,4 +1,4 @@
-import { Outlines, useGLTF, useKeyboardControls } from "@react-three/drei";
+import { Outlines, Sparkles, useGLTF, useKeyboardControls } from "@react-three/drei";
 import { StreetLight } from "./StreetLight";
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
@@ -83,6 +83,13 @@ function Map() {
                     >
                         <torusGeometry args={[.2, .1, 16, 28]} />
                         <meshToonMaterial color={playerColor} />
+                        <Outlines thickness={5} color="black" />
+                        <Sparkles
+                            size={4}
+                            speed={0.5}
+                            count={10}
+                            color={"yellow"}
+                        />
                     </mesh>
                 </RigidBody >
             </group>
