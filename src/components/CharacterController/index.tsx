@@ -6,10 +6,11 @@ import { useKeyboardControls } from '@react-three/drei'
 import { useControls } from 'leva'
 import CharacterModel from './CharacterModel'
 import { useAppContext } from '../../context/AppContext'
+import { isMobile } from 'react-device-detect';
 
 function CharacterController() {
     const [animation, setAnimation] = useState("idle");
-    const { start } = useAppContext();
+    const { start, isSprinting, isWalking } = useAppContext();
     const animationSet = {
         idle: 'CharacterArmature|Idle',
         walk: 'CharacterArmature|Walk',
@@ -58,18 +59,29 @@ function CharacterController() {
             POSITION_Z: { value: -5, min: -10, max: 20, step: .5 },
         }
     );
+
+
+    const cameraTargetCoordMobile = new Vector3(0, 1, 8);
+    const cameraPositionCoordMobile = new Vector3(0, 3.5, -4);
+
+    const cameraTargetCoord = isMobile
+        ? cameraTargetCoordMobile
+        : new Vector3(TARGET_X, TARGET_Y, TARGET_Z);
+
+    const cameraPositionCoord = isMobile
+        ? cameraPositionCoordMobile
+        : new Vector3(POSITION_X, POSITION_Y, POSITION_Z);
     // const forwardPressed = useKeyboardControls<PlayControls>(state => state.forward)
     const wasForwardPressed = useRef(false);
     const wasShiftPressed = useRef(false);
 
 
     useFrame(({ camera }) => {
-        const isForward = get().forward;
-        const isShift = get().shift;
+        const isForward = get().forward || isWalking;
+        const isShift = get().shift || isSprinting;
         // Detect key down
         if (isForward && !wasForwardPressed.current) {
             setAnimation(animationSet.walk);
-
             wasForwardPressed.current = true;
         }
 
@@ -97,6 +109,8 @@ function CharacterController() {
             wasForwardPressed.current = false;
         }
 
+
+
         if (start) {
             if (cameraPosition.current && cameraWorldPosition.current) {
                 cameraPosition.current.getWorldPosition(cameraWorldPosition.current);
@@ -115,25 +129,19 @@ function CharacterController() {
         position={[0, 5, 0]}
         colliders={false}
         lockRotations
-        onCollisionExit={(e) => {
-            console.log("🚀 ~ onCollisionExit ~ e:", e)
-        }}
-        onCollisionEnter={(e) => {
-            console.log("🚀 ~ onCollisionEnter ~ e:", e)
-        }}
 
     >
         <group ref={container}>
             <group ref={cameraTarget}
-                position-y={TARGET_Y}  // 0.5
-                position-x={TARGET_X} // 0
-                position-z={TARGET_Z}
+                position-y={cameraTargetCoord.y}  // 0.5
+                position-x={cameraTargetCoord.x} // 0
+                position-z={cameraTargetCoord.z} // 8
             >
             </group>
             <group ref={cameraPosition}
-                position-x={POSITION_X} // 0
-                position-y={POSITION_Y}
-                position-z={POSITION_Z} >
+                position-x={cameraPositionCoord.x} // 0
+                position-y={cameraPositionCoord.y}
+                position-z={cameraPositionCoord.z} >
             </group>
 
 

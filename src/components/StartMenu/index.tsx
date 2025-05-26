@@ -20,10 +20,10 @@ function StartMenu() {
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="absolute z-10  h-full  left-1/4 flex items-center justify-center flex-col"
+                    className="w-full md:w-1/2 absolute z-10  h-full flex items-center justify-center flex-col"
                 >
-                    <div className="rounded-lg bg-gray-800 p-8 cursor-pointer" onClick={handleClick}>
-                        <span className="font-bold text-4xl p-8">Start Experience</span>
+                    <div className="rounded-lg text-center bg-gray-800 p-8 cursor-pointer" onClick={handleClick}>
+                        <span className="font-bold text-2xl md:text-4xl p-8">Start Experience</span>
                     </div>
                 </motion.div>
             }

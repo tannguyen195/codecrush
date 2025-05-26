@@ -12,7 +12,7 @@ const rotationEuler = new THREE.Euler(0, 0, 0);
 const quaternion = new THREE.Quaternion();
 function Map() {
     const { nodes, materials } = useGLTF("/models/paris.glb")
-    const { playerColor, changeRandomColor } = useAppContext();
+    const { playerColor, changeRandomColor, isWalking, isSprinting } = useAppContext();
 
     const [, get] = useKeyboardControls();
     const wasForwardPressed = useRef(false);
@@ -20,8 +20,8 @@ function Map() {
     const mRef = useRef<THREE.Mesh>(null);
 
     useFrame(() => {
-        const isForward = get().forward;
-        const isShift = get().shift;
+        const isForward = get().forward || isWalking;
+        const isShift = get().shift || isSprinting;
         if (!mapRef.current) return;
         if (isForward) {
             if (isShift) {
@@ -38,8 +38,8 @@ function Map() {
     })
     const rigidRef = useRef<RapierRigidBody>(null);
     useFrame(() => {
-        const isForward = get().forward;
-        const isShift = get().shift;
+        const isForward = get().forward|| isWalking;
+        const isShift = get().shift || isSprinting;
         if (!rigidRef.current) return;
         if (isForward) {
             if (isShift) {

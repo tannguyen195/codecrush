@@ -1,7 +1,7 @@
 
 import { Suspense, useMemo } from 'react';
 import './App.css'
-import {  KeyboardControls, PerspectiveCamera, type KeyboardControlsEntry } from '@react-three/drei';
+import { KeyboardControls, PerspectiveCamera, type KeyboardControlsEntry } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import CharacterController from './components/CharacterController';
@@ -13,6 +13,8 @@ import { Leva, useControls } from 'leva';
 import StartMenu from './components/StartMenu';
 import MusicPlayer from './components/MusicPlayer';
 import { Moon, Sun } from 'lucide-react';
+import { isMobile } from 'react-device-detect';
+import MobileJoyStick from './components/MobileJoyStick';
 
 
 
@@ -41,14 +43,16 @@ function App() {
     <AppProvider>
       <KeyboardControls map={map}>
         <div className="h-screen" id="canvas">
+          {
+            isMobile && <MobileJoyStick />
+          }
           <div className="bg-gray-800 p-4 rounded-xl absolute top-4 right-4 z-10  gap-2 flex flex-col items-start">
-           
             <div className='flex gap-2'>
               <Controller />
               <MusicPlayer />
             </div>
             <kbd>
-              <span >W: Move forward</span>
+              <span >W: Walk</span>
               <br />
               <span >Shift: Sprint</span>
 
@@ -62,15 +66,15 @@ function App() {
             <EffectComposer>
               <Bloom intensity={5} />
             </EffectComposer>
-              {/* <OrbitControls /> */}
-              <Environment />
-              <CameraSetting />
-              <Suspense >
-                <Physics timeStep="vary" debug>
-                  <Map />
-                  <CharacterController />
-                </Physics>
-              </Suspense>
+            {/* <OrbitControls /> */}
+            <Environment />
+            <CameraSetting />
+            <Suspense >
+              <Physics timeStep="vary" debug>
+                <Map />
+                <CharacterController />
+              </Physics>
+            </Suspense>
           </Canvas>
 
           <Leva hidden />
@@ -129,7 +133,7 @@ function CameraSetting() {
   return <PerspectiveCamera
     makeDefault
     near={0.1}
-    fov={40}
+    fov={isMobile ? 70 : 40}
     far={1000}
   />;
 }
