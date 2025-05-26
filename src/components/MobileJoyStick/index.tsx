@@ -32,8 +32,8 @@ function MobileJoyStick() {
                 <div className="joystick-inner"></div>
             </div>
             <div className="flex items-center justify-around w-full">
-                <button onPointerDown={handlePointerWalkDown} onPointerUp={handlePointerWalkUp} className="rounded-full">Walk</button>
-                <button onPointerDown={handlePointerSprintDown} onPointerUp={handlePointerSprintUp} className="button left">Sprint</button>
+                <button onPointerDown={handlePointerWalkDown} onPointerUp={handlePointerWalkUp} className="rounded-full w-[50px] h-[50px]"></button>
+                <button onPointerDown={handlePointerSprintDown} onPointerUp={handlePointerSprintUp} className="rounded-full w-[50px] h-[50px]"></button>
             </div>
         </div>
     );
