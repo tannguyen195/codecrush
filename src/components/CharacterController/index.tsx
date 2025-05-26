@@ -92,7 +92,7 @@ function CharacterController() {
         }
 
         if (
-            isShift
+            isShift && isForward 
         ) {
             setAnimation(animationSet.run);
             if (!wasShiftPressed.current) {
